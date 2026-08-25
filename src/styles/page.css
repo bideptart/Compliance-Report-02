@@ -1,0 +1,47 @@
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.table-shell {
+  overflow-x: auto;
+}
+
+.table-shell table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table-shell thead th {
+  text-align: left;
+  padding: 10px 14px;
+  background: var(--color-table-header-bg);
+  color: var(--color-table-header-text);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.table-shell thead th:first-child {
+  border-top-left-radius: var(--radius-sm);
+}
+
+.table-shell thead th:last-child {
+  border-top-right-radius: var(--radius-sm);
+}
+
+.table-empty-row td {
+  padding: 0;
+}

@@ -1,0 +1,38 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.status-badge--success {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.status-badge--warning {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+.status-badge--danger {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.status-badge--neutral {
+  background: var(--color-muted-bg);
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+/* Foreign Voice Provider is informational, not pass/fail -- its own
+   neutral teal so it never reads as a warning/problem. */
+.status-badge--teal {
+  background: var(--color-neutral-tone-light);
+  color: var(--color-neutral-tone);
+}

@@ -1,0 +1,61 @@
+.distribution-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.distribution-chart__row-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.distribution-chart__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.distribution-chart__value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.distribution-chart__pct {
+  font-weight: 500;
+  color: var(--color-text-subtle);
+}
+
+.distribution-chart__track {
+  height: 9px;
+  border-radius: 999px;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.distribution-chart__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-primary);
+  transition: width 0.4s ease;
+}
+
+.distribution-chart__fill--success {
+  background: var(--color-success);
+}
+
+.distribution-chart__fill--warning {
+  background: var(--color-warning);
+}
+
+.distribution-chart__fill--danger {
+  background: var(--color-danger);
+}
+
+.distribution-chart__fill--neutral {
+  background: var(--color-text-subtle);
+}

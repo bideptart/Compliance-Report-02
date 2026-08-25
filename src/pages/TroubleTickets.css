@@ -1,0 +1,95 @@
+.ticket-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+}
+
+.ticket-filters__search {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 260px;
+}
+
+.ticket-filters__search input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-size: 13.5px;
+  color: var(--color-text);
+}
+
+.ticket-filters__search button {
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ticket-filters__search button:hover {
+  background: var(--color-primary-hover);
+}
+
+.ticket-filters__selects {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.ticket-filters__selects select {
+  height: 38px;
+  padding: 0 36px 0 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-size: 13px;
+  color: var(--color-text);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ticket-filters__selects select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.ticket-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ticket-empty__cta {
+  margin-top: 4px;
+}
+
+.ticket-table__row {
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.ticket-table__row:hover {
+  background: var(--color-table-row-hover);
+}
+
+@media (max-width: 640px) {
+  .ticket-filters__selects {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

@@ -1,0 +1,51 @@
+.rmd-results-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-table-row-text);
+  white-space: nowrap;
+}
+
+.rmd-results-table__row {
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.rmd-results-table__row:hover {
+  background: var(--color-table-row-hover);
+}
+
+.rmd-results-table__row--selected {
+  background: var(--color-primary-light);
+  box-shadow: inset 3px 0 0 var(--color-primary);
+}
+
+.rmd-results-table__business {
+  font-weight: 600;
+  white-space: normal;
+  min-width: 180px;
+}
+
+.rmd-results-table__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 12.5px;
+}
+
+.rmd-results-table__link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.rmd-results-table__link-name {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.rmd-results-table__link-name:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}

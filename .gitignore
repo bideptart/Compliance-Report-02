@@ -1,0 +1,56 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python / Django backend
+backend/venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+.Python
+pip-log.txt
+
+# Local database (contains real customer/compliance data)
+backend/db.sqlite3
+*.sqlite3
+
+# Uploaded media (real KYC / agreement / document uploads)
+backend/media/*
+!backend/media/.gitkeep
+
+# Server / debug logs
+backend/server.log
+*.log
+
+# Claude Code local session/runtime state
+.claude/scheduled_tasks.lock

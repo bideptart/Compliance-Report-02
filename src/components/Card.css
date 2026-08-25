@@ -1,0 +1,192 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-card {
+  position: relative;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+/* A thin accent line at the top, keyed to the card's tone -- deliberately
+   thin (not a thick colored border) so it reads as a subtle signal, not a
+   decorative block. */
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-text-subtle);
+}
+
+.stat-card--success::before {
+  background: var(--color-success);
+}
+
+.stat-card--warning::before {
+  background: var(--color-warning);
+}
+
+.stat-card--danger::before {
+  background: var(--color-danger);
+}
+
+.stat-card--neutral::before {
+  background: var(--color-neutral-tone);
+}
+
+.stat-card--primary::before {
+  background: var(--color-primary);
+}
+
+.stat-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stat-card__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.stat-card__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--color-text-subtle);
+}
+
+.stat-card__dot--success {
+  background: var(--color-success);
+}
+
+.stat-card__dot--warning {
+  background: var(--color-warning);
+}
+
+.stat-card__dot--danger {
+  background: var(--color-danger);
+}
+
+.stat-card__dot--neutral {
+  background: var(--color-neutral-tone);
+}
+
+.stat-card__dot--primary {
+  background: var(--color-primary);
+}
+
+.stat-card__icon {
+  color: var(--color-text-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-card__icon--success {
+  color: var(--color-success);
+}
+
+.stat-card__icon--warning {
+  color: var(--color-warning);
+}
+
+.stat-card__icon--danger {
+  color: var(--color-danger);
+}
+
+.stat-card__icon--neutral {
+  color: var(--color-neutral-tone);
+}
+
+.stat-card__icon--primary {
+  color: var(--color-primary);
+}
+
+.stat-card__value {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  letter-spacing: -0.5px;
+}
+
+.stat-card__hint {
+  font-size: 12px;
+  color: var(--color-text-subtle);
+}
+
+.stat-card__progress-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-muted-bg);
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.stat-card__progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.stat-card__progress-fill--success {
+  background: var(--color-success);
+}
+
+.stat-card__progress-fill--warning {
+  background: var(--color-warning);
+}
+
+.stat-card__progress-fill--danger {
+  background: var(--color-danger);
+}
+
+.stat-card__progress-fill--neutral {
+  background: var(--color-neutral-tone);
+}
+
+/* Wraps a StatCard so the whole card is clickable -- reused as both a
+   <Link> (Dashboard, deep-linking into a filtered Customers/Trouble
+   Tickets view) and a plain <button> (Intermediate Registry, filtering
+   its own table in place), so it resets button chrome too rather than
+   assuming an anchor. The card's own look carries through untouched. */
+.dashboard-stat-link {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dashboard-stat-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.dashboard-stat-link:hover .stat-card {
+  border-color: var(--color-primary);
+}

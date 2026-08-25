@@ -1,0 +1,162 @@
+:root {
+  /* Core surfaces & text -- light, warm-neutral enterprise SaaS theme,
+     with the original Blue accent restored as the brand/interactive
+     color (everything else -- whites, greys, sidebar layout -- stays as
+     it was). */
+  --color-bg: #f8faf9;
+  --color-surface: #ffffff;
+  --color-muted-bg: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+  --color-text-subtle: #9ca3af;
+
+  --color-primary: #1d4ed8;
+  --color-primary-hover: #2563eb;
+  --color-primary-light: #eff6ff;
+  --color-accent: #2563eb;
+
+  /* Sidebar stays light -- active navigation is a soft blue tint with
+     dark blue text/icon, never a solid filled button. */
+  --color-sidebar-bg: #ffffff;
+  --color-sidebar-bg-active: #dbeafe;
+  --color-sidebar-bg-hover: #f3f4f6;
+  --color-sidebar-text: #374151;
+  --color-sidebar-icon: #6b7280;
+  --color-sidebar-text-active: #1d4ed8;
+  --color-sidebar-border: #e5e7eb;
+
+  /* Semantic status colors -- never the brand emerald, so compliance
+     status always reads distinctly from navigation/interactive elements.
+     Each has a light background pairing for badges/pills. */
+  --color-success: #15803d;
+  --color-success-light: #dcfce7;
+  --color-warning: #b45309;
+  --color-warning-light: #fef3c7;
+  --color-danger: #b91c1c;
+  --color-danger-light: #fee2e2;
+  --color-info: #0369a1;
+  --color-info-light: #e0f2fe;
+  /* Foreign Voice Provider is informational, not pass/fail -- its own
+     neutral slate/teal tone so it never gets mistaken for a status verdict. */
+  --color-neutral-tone: #0f766e;
+  --color-neutral-tone-light: #f0fdfa;
+
+  /* Table-specific tones -- close to but distinct from the general text/bg
+     tokens above (e.g. dense row text is a touch softer than headings, and
+     header bg is a touch cooler than the page bg), so tables get their own
+     tokens rather than overloading the general ones. */
+  --color-table-header-bg: #f9fafb;
+  --color-table-header-text: #6b7280;
+  --color-table-row-text: #1f2937;
+  --color-table-row-hover: #eff6ff;
+
+  --shadow-sm: 0 1px 2px rgba(31, 41, 55, 0.05);
+  --shadow-md: 0 4px 14px rgba(31, 41, 55, 0.07);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+
+  --sidebar-width: 260px;
+  --sidebar-width-collapsed: 76px;
+  --header-height: 64px;
+
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+
+/* Dark mode -- same token names, swapped values, so every component
+   (which already styles itself entirely from these variables) repaints
+   automatically. Toggled via a `data-theme` attribute on <html> (see
+   context/ThemeContext.jsx) rather than prefers-color-scheme, since this
+   is an explicit in-app toggle, not just following the OS setting. */
+:root[data-theme="dark"] {
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-muted-bg: #24324a;
+  --color-border: #334155;
+  --color-border-strong: #475569;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-text-subtle: #64748b;
+
+  --color-primary: #3b82f6;
+  --color-primary-hover: #60a5fa;
+  --color-primary-light: #1e3a5f;
+  --color-accent: #60a5fa;
+
+  --color-sidebar-bg: #1e293b;
+  --color-sidebar-bg-active: #1e3a5f;
+  --color-sidebar-bg-hover: #24324a;
+  --color-sidebar-text: #cbd5e1;
+  --color-sidebar-icon: #94a3b8;
+  --color-sidebar-text-active: #60a5fa;
+  --color-sidebar-border: #334155;
+
+  --color-success: #4ade80;
+  --color-success-light: #14321f;
+  --color-warning: #fbbf24;
+  --color-warning-light: #3a2c0d;
+  --color-danger: #f87171;
+  --color-danger-light: #3a1717;
+  --color-info: #38bdf8;
+  --color-info-light: #0d2c3a;
+  --color-neutral-tone: #2dd4bf;
+  --color-neutral-tone-light: #0d3330;
+
+  --color-table-header-bg: #24324a;
+  --color-table-header-text: #94a3b8;
+  --color-table-row-text: #f1f5f9;
+  --color-table-row-hover: #24324a;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.4);
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

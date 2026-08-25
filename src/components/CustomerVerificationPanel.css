@@ -1,0 +1,121 @@
+.customer-verification__summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.customer-verification__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.customer-verification__field-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.customer-verification__field-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.customer-verification__tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.customer-verification-tile {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.customer-verification-tile--clickable {
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.customer-verification-tile--clickable:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.customer-verification-tile__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.customer-verification-tile__title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.customer-verification-tile__full-status {
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.customer-verification-tile__number {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.customer-verification-tile__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.customer-verification-tile__select {
+  margin-top: 4px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.customer-verification-tile__select:hover {
+  border-color: var(--color-primary);
+}
+
+.customer-verification-tile__frn-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 900px) {
+  .customer-verification__summary,
+  .customer-verification__tiles {
+    grid-template-columns: 1fr;
+  }
+}
