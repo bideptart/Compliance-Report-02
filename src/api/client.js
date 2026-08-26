@@ -1,4 +1,4 @@
-export const API_BASE_URL = "https://compliance-report-02.onrender.com";
+export const API_BASE_URL = "https://compliance-report-02.onrender.com/api";
 
 export class ApiError extends Error {
   constructor(message, status) {
