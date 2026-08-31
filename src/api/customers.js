@@ -1,4 +1,4 @@
-import { apiGet, apiPost } from "./client";
+import { API_BASE_URL, apiGet, apiPost } from "./client";
 
 export function fetchCustomerStats() {
   return apiGet("/customers/stats/");
@@ -29,4 +29,8 @@ export function linkCustomerRecords(id, { rmdRecordId, fccRecordId } = {}) {
   if (rmdRecordId !== undefined) body.rmd_record_id = rmdRecordId;
   if (fccRecordId !== undefined) body.fcc_record_id = fccRecordId;
   return apiPost(`/customers/${id}/link-records/`, body);
+}
+
+export function customerReportPdfUrl(id) {
+  return `${API_BASE_URL}/customers/${id}/report/`;
 }

@@ -11,6 +11,7 @@ import {
   FileCheck2,
   UploadCloud,
   Save,
+  Download,
 } from "lucide-react";
 import PageHeader from "../components/PageHeader";
 import Section from "../components/Section";
@@ -24,7 +25,7 @@ import CustomerRecordsPanel from "../components/CustomerRecordsPanel";
 import CustomerAgreementsPanel from "../components/CustomerAgreementsPanel";
 import AgreementFormPanel from "../components/AgreementFormPanel";
 import AgreementDetailPanel from "../components/AgreementDetailPanel";
-import { fetchCustomerDetail, linkCustomerRecords } from "../api/customers";
+import { fetchCustomerDetail, linkCustomerRecords, customerReportPdfUrl } from "../api/customers";
 import { getCustomersListUrl } from "../utils/customersListUrl";
 import { fetchRmdDetail } from "../api/rmd";
 import { fetchFcc499Detail } from "../api/fcc499";
@@ -147,6 +148,9 @@ export default function CustomerDetail() {
   const [agreementDetailLoading, setAgreementDetailLoading] = useState(false);
   const [agreementDetailError, setAgreementDetailError] = useState(null);
   const [agreementDetail, setAgreementDetail] = useState(null);
+
+  const [reportDownloading, setReportDownloading] = useState(false);
+  const [reportDownloadError, setReportDownloadError] = useState(null);
 
   const loadDocuments = () => {
     fetchDocuments({ customerId: id, documentType: "document" })
@@ -357,6 +361,47 @@ export default function CustomerDetail() {
     loadAgreements();
   };
 
+  // Same fetch-as-blob-and-save pattern as RmdDetailPanel's download button --
+  // the PDF is generated fresh server-side from this customer's real data on
+  // every click, so it's fetched directly rather than linked to as a static
+  // file.
+  const handleDownloadReport = async () => {
+    setReportDownloadError(null);
+    setReportDownloading(true);
+    try {
+      const response = await fetch(customerReportPdfUrl(id));
+      if (!response.ok) {
+        // The backend returns {"detail": "..."} JSON on a genuine generation
+        // failure (see CustomerReportPDFView) -- surface that instead of a
+        // generic message whenever it's actually present.
+        let detail = null;
+        try {
+          detail = (await response.json())?.detail;
+        } catch {
+          detail = null;
+        }
+        throw new Error(detail || `The PDF report request failed (HTTP ${response.status}).`);
+      }
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      const companyName = (customer?.company_name || customer?.carrier || `customer-${id}`)
+        .replace(/[\\/:*?"<>|]+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+      link.download = `${companyName} Onboarding Checklist.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      setReportDownloadError(err?.message || "Unable to generate this customer's PDF report. Please try again.");
+    } finally {
+      setReportDownloading(false);
+    }
+  };
+
   const isAmbiguousMatch =
     customer?.rmd_verification?.status === "multiple_matches" || customer?.fcc_verification?.status === "multiple_matches";
 
@@ -369,7 +414,23 @@ export default function CustomerDetail() {
         Back to Customers
       </Link>
 
-      <PageHeader title={customer?.carrier ?? customer?.company_name ?? "Customer"} />
+      <PageHeader
+        title={customer?.carrier ?? customer?.company_name ?? "Customer"}
+        actions={
+          customer && (
+            <button
+              type="button"
+              className="dashboard-section-link"
+              onClick={handleDownloadReport}
+              disabled={reportDownloading}
+            >
+              {reportDownloading ? "Generating..." : "Download PDF"}
+              {reportDownloading ? <Loader2 size={14} className="module-status-card__spinner" /> : <Download size={14} />}
+            </button>
+          )
+        }
+      />
+      {reportDownloadError && <p className="rmd-detail__download-error">{reportDownloadError}</p>}
 
       {loading && (
         <div className="customers-loading">

@@ -1,4 +1,8 @@
-export const API_BASE_URL = "https://compliance-report-02.onrender.com/api";
+// The Vite dev server (npm run dev) always talks to the local Django backend
+// on :8000 -- see README's "Getting Started". A production build
+// (import.meta.env.DEV === false) keeps calling the deployed backend, exactly
+// as before; only local dev behavior changes here.
+export const API_BASE_URL = import.meta.env.DEV ? "http://localhost:8000/api" : "https://compliance-report-02.onrender.com/api";
 
 export class ApiError extends Error {
   constructor(message, status) {

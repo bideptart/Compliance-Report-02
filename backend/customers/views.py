@@ -1,6 +1,11 @@
+import logging
+import re
+
+from django.http import HttpResponse
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from fcc499.models import Fcc499Filing
 from rmd.models import RmdFiling
@@ -12,7 +17,10 @@ from verification.customer import (
 from verification.fcc_lookup import DEFAULT_LIVE_FETCH_BUDGET
 
 from .models import Customer
+from .report import generate_customer_report_pdf
 from .serializers import CustomerSerializer
+
+logger = logging.getLogger(__name__)
 
 # See verification.fcc_lookup.DEFAULT_LIVE_FETCH_BUDGET -- RMD and cached FCC
 # checks are single bulk queries per page (no N+1), but an uncached FCC
@@ -232,3 +240,31 @@ class CustomerLinkRecordsView(generics.GenericAPIView):
         result["linked_rmd_record_id"] = customer.linked_rmd_record_id
         result["linked_fcc_record_id"] = customer.linked_fcc_record_id
         return Response(result)
+
+
+class CustomerReportPDFView(APIView):
+    """GET /api/customers/<id>/report/ - the onboarding/compliance checklist
+    PDF for this one customer, generated fresh from their real RMD/FCC/
+    Intermediate Registry/Agreements data (see customers.report). Never a
+    static or cached file -- every download reflects the data on file right
+    now.
+    """
+
+    def get(self, request, pk, *args, **kwargs):
+        customer = generics.get_object_or_404(Customer, pk=pk)
+
+        try:
+            pdf_bytes = generate_customer_report_pdf(customer)
+        except Exception:
+            logger.exception("Failed to generate PDF report for customer %s", pk)
+            return Response(
+                {"detail": "The PDF report could not be generated for this customer. Please try again."},
+                status=500,
+            )
+
+        safe_name = re.sub(r'[\\/:*?"<>|]+', " ", customer.carrier).strip() or f"customer-{customer.id}"
+        filename = f"{safe_name} Onboarding Checklist.pdf"
+
+        response = HttpResponse(pdf_bytes, content_type="application/pdf")
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        return response
